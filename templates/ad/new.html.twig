@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+    <section class="container">
+        <h1>Créer une nouvelle annonce</h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        <button class="btn btn-primary">Créer la nouvelle annonce</button>
+
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
+
+{% block _annonce_form_images_widget %}
+    <p class="small">(Ajouter des images dans votre annonce)</p>
+
+    {{ form_widget(form) }}
+
+    <div class="form-group">
+        <button type="button" id="add-image" class="btn btn-secondary">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block _annonce_form_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _annonce_form_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.url) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.caption) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#add-image').click(function(){
+            // numéro des futurs champs à créer
+            const index = $('#annonce_form_images div.form-group').length;
+
+            // prototype des entrées
+            const tmpl = $('#annonce_form_images').data('prototype').replace(/__name__/g, index);
+            //console.log(tmpl);
+
+            //j'injecte le code dans la div
+            $('#annonce_form_images').append(tmpl);
+
+            //gestion bouton suppression
+            handleDeleteButtons();
+        });
+
+        function handleDeleteButtons() {
+            $('button[data-action="delete"]').click(function(){
+                const target = this.dataset.target;
+                //console.log(target);
+                $(target).remove();
+            });
+        }
+
+        handleDeleteButtons();
+    </script>
+{% endblock %}
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, repudiandae?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque eligendi eveniet, facere porro quae suscipit voluptate. A animi aspernatur autem corporis eligendi exercitationem harum labore nostrum odio quae tempore, velit veniam voluptate? Delectus fugiat magni nisi porro rem repellat? </p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dolor earum ipsam iusto voluptatem. Repellat?</p>
+

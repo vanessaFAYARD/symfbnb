@@ -3,8 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\Image;
+use App\Form\AnnonceFormType;
 use App\Repository\AdRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Tests\Compiler\I;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdController extends AbstractController
@@ -22,6 +28,42 @@ class AdController extends AbstractController
     }
 
     /**
+     * create new add - form
+     * @Route("/annonces/creer", name="ads_create")
+     */
+    public function create(Request $request, ObjectManager $manager)
+    {
+        $ad = new Ad();
+
+        $form = $this->createForm(AnnonceFormType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            foreach ($ad->getImages() as $image) {
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * Return a response : ad
      * @Route("/annonces/{slug}", name="ads_show")
      */
@@ -33,14 +75,5 @@ class AdController extends AbstractController
         return $this->render('ad/show.html.twig', [
             'ad' => $ad,
         ]);
-    }
-
-    /**
-     * create new add - form
-     * @Route("/annonces/créer", name="ads_create")
-     */
-    public function create()
-    {
-        return $this->render('ad/new.html.twig');
     }
 }

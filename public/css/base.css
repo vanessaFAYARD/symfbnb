@@ -10,8 +10,24 @@
     width: 100%;
     display: block;
 }
-/* HEADER
+.container {
+    margin-top: 25px;
+}
+/* AD
 ===============================*/
+.ad-title {
+    padding: 2em;
+    background-size: cover;
+    background-position: center, center;
+}
+.ad-title h1, .ad-title p {
+    color: #FFFFFF;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+.carousel-caption h6, .carousel-caption p {
+    color: #FFFFFF;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
 
 /* BODY
 ===============================*/

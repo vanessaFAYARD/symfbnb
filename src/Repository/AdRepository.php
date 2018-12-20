@@ -19,10 +19,10 @@ class AdRepository extends ServiceEntityRepository
         parent::__construct($registry, Ad::class);
     }
 
-    // /**
-    //  * @return Ad[] Returns an array of Ad objects
-    //  */
-    /*
+    /**
+    * @return Ad[] Returns an array of Ad objects
+    */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
@@ -34,17 +34,14 @@ class AdRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Ad
+    public function findOneBySlug($value): ?Ad
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
+            ->andWhere('a.slug = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

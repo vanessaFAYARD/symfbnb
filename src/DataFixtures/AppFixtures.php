@@ -20,9 +20,10 @@ class AppFixtures extends Fixture
             $title = $faker->sentence();
             $introduction = $faker->paragraph(2);
             $content = '<p>' . join(' </p><p>', $faker->paragraphs(5)) . '</p>';
+            $number = 1000+$i;
 
             $ad->setTitle($title)
-                ->setCoverImage("http://placeimg.com/1000/350/arch")
+                ->setCoverImage("https://picsum.photos/1000/400?image=$number")
                 ->setIntroduction($introduction)
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
@@ -32,7 +33,7 @@ class AppFixtures extends Fixture
                 $image = new Image();
 
                 $image->setUrl($faker->imageUrl())
-                    ->setCaption($faker->sentence(3))
+                    ->setCaption($faker->sentence())
                     ->setAd($ad);
 
                 $manager->persist($image);
