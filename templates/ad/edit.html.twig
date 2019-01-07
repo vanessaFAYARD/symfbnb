@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'une annonce{% endblock %}
+{% block title %}Edition d'une annonce{% endblock %}
 
 {% form_theme form 'ad/_collection.html.twig' %}
 
 {% block body %}
     <section class="container">
-        <h1>Créer une nouvelle annonce</h1>
+        <h1>Modifier l'annonce</h1>
 
         {{ form_start(form) }}
 
         {{ form_widget(form) }}
 
-        <button class="btn btn-primary">Créer la nouvelle annonce</button>
+        <button class="btn btn-primary">Enregistrer les modifications</button>
 
         {{ form_end(form) }}
     </section>
@@ -22,4 +22,3 @@
 {% block javascripts %}
     <script src="/js/ad.js"></script>
 {% endblock %}
-

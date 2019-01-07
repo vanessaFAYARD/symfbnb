@@ -19,16 +19,17 @@ class AnnonceFormType extends AbstractType
      * Get label and placeholder configuration
      * @param string $label
      * @param string $placeholder
+     * @param array $options
      * @return array
      */
-    private function getConfiguration($label, $placeholder)
+    private function getConfiguration($label, $placeholder, $options = [])
     {
-        return [
+        return array_merge([
             'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
-        ];
+        ], $options);
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,7 +37,9 @@ class AnnonceFormType extends AbstractType
             ->add('title', TextType::class,
                 $this->getConfiguration("Titre annonce", "Titre de l'annonce"))
             ->add('slug', TextType::class,
-                $this->getConfiguration("Url de l'annonce", "url de l'annonce (automatique)"))
+                $this->getConfiguration("Url de l'annonce", "url de l'annonce (automatique)", [
+                    'required' => false
+                ]))
             ->add('coverImage', UrlType::class,
                 $this->getConfiguration("Url de l'image", "Url de l'image principale"))
             ->add('introduction', TextType::class,
@@ -50,7 +53,8 @@ class AnnonceFormType extends AbstractType
             ->add('images', CollectionType::class,
                 [
                     'entry_type' => ImageType::class,
-                    'allow_add' => true
+                    'allow_add' => true,
+                    'allow_delete' => true
                 ]
             );
     }

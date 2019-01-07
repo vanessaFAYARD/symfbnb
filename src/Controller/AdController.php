@@ -64,6 +64,39 @@ class AdController extends AbstractController
     }
 
     /**
+     * Show edit form
+     * @Route("/annonces/{slug}/edition", name="ads_edit")
+     */
+    public function edit(Ad $ad, Request $request, ObjectManager $manager)
+    {
+        $form = $this->createForm(AnnonceFormType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            foreach ($ad->getImages() as $image) {
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Les modifications de l'annonce <strong>{$ad->getTitle()}</strong> ont bien étés enregistrées !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+        }
+        return $this->render('ad/edit.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * Return a response : ad
      * @Route("/annonces/{slug}", name="ads_show")
      */
