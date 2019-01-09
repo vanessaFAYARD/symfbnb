@@ -13,24 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnnonceFormType extends AbstractType
+class AnnonceFormType extends ApplicationType
 {
-    /**
-     * Get label and placeholder configuration
-     * @param string $label
-     * @param string $placeholder
-     * @param array $options
-     * @return array
-     */
-    private function getConfiguration($label, $placeholder, $options = [])
-    {
-        return array_merge([
-            'label' => $label,
-            'attr' => [
-                'placeholder' => $placeholder
-            ]
-        ], $options);
-    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

@@ -157,4 +157,17 @@ class AccountController extends AbstractController
             'formUpdate' =>$form->createView()
         ]);
     }
+
+    /**
+     * Show user account
+     *
+     * @Route("/compte", name="account_index")
+     * @return Response
+     */
+    public function myAccount()
+    {
+        return $this->render('user/index.html.twig', [
+            'user' => $this->getUser()
+        ]);
+    }
 }

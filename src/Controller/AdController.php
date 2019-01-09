@@ -45,6 +45,8 @@ class AdController extends AbstractController
                 $manager->persist($image);
             }
 
+            $ad->setAuthor($this->getUser());
+
             $manager->persist($ad);
             $manager->flush();
 
@@ -65,7 +67,7 @@ class AdController extends AbstractController
 
     /**
      * Show edit form
-     * @Route("/annonces/{slug}/edition", name="ads_edit")
+     * @Route("/annonces/{slug}/modifier", name="ads_edit")
      */
     public function edit(Ad $ad, Request $request, ObjectManager $manager)
     {
