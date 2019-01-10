@@ -48,6 +48,11 @@
 /* BODY
 ===============================*/
 
+/* BOOKING
+===============================*/
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+    color: firebrick !important;
+}
 /* FOOTER
 ===============================*/
 
