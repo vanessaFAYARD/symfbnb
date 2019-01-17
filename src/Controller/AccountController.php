@@ -8,7 +8,6 @@ use App\Form\AccountType;
 use App\Form\PasswordUpdateType;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
-use phpDocumentor\Reflection\Types\Void_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -170,7 +169,7 @@ class AccountController extends AbstractController
      */
     public function myAccount()
     {
-        return $this->render('user/book.html.twig', [
+        return $this->render('user/index.html.twig', [
             'user' => $this->getUser()
         ]);
     }

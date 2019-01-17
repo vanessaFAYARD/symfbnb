@@ -47,6 +47,36 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                <hr>
+                {% if ad.comments | length > 0 %}
+                    <h3 class="mb-3">Commentaires de nos voyageurs :</h3>
+                    <div class="alert alert-info">
+                        <div class="text-center">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <p class="alert-heading h4">Note globale donnée par nos voyageurs</p>
+                                </div>
+                                <div class="col">
+                                    {% include 'partials/rating.html.twig' with {'rating': ad.avgRatings} %}
+                                <br>
+                                <small>(Calculée sur {{ ad.comments | length }} avis)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for comment in ad.comments %}
+                        <div class="bg-light rounded mb-3 py-3 px-3">
+                            <strong>{{ comment.author.firstName }}</strong> a dit :
+                            <blockquote>
+                                {{ comment.content }}
+                            </blockquote>
+                            <strong>Note :</strong>
+                            {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>Cette annonce n'a pas encore reçu de commentaires...</h3>
+                {% endif %}
             </div>
             <div class="col">
                 <div class="row">

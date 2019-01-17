@@ -45,6 +45,11 @@
     max-height: 24px;
 }
 
+.avatart-micro {
+    max-width: 22px;
+    max-height: 22px;
+}
+
 /* BODY
 ===============================*/
 

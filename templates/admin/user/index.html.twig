@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Gestion des utilisateurs</h1>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prénom-Nom</th>
+                <th>Introduction</th>
+                <th>Description</th>
+                <th>Annonce(s)</th>
+                <th>Réservation(s)</th>
+                <th>Commentaire(s)</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        <img src="{{ user.picture }}" alt="Avatar de {{ user.fullName }}" class="avatar avatart-micro mr-2">
+                        {{ user.fullName }}
+                    </td>
+                    <td>{{ user.introduction | raw }}</td>
+                    <td>{{ user.description | raw }}</td>
+                    <td class="text-center">{{ user.ads | length }}</td>
+                    <td class="text-center">{{user.bookings | length }}</td>
+                    <td class="text-center">{{user.comments |length }}</td>
+                    <td>
+                        <a href="{{ path('user_show', {'slug': user.slug}) }}" class="btn btn-info"><i class="fas fa-chalkboard-teacher"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+

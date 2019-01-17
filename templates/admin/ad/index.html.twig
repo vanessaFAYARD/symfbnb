@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des annonces{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Gestion des annonces</h1>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th class="text-center">Réservations</th>
+                <th class="text-center">Note</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for ad in ads %}
+                <tr>
+                    <td>{{ ad.id }}</td>
+                    <td>{{ ad.title }}</td>
+                    <td>
+                        <img src="{{ ad.author.picture }}" alt="Avatar de {{ ad.author.fullName }}" class="avatar avatart-micro mr-2">
+                        {{ ad.author.fullName }}
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-dark rounded">{{ ad.bookings | length }}</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-dark rounded">{{ ad.avgRatings | number_format(1, ',', ' ') }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_ad_edit', {'id': ad.id}) }}" class="btn btn-dark"><i class="far fa-edit"></i></a>
+                        <a href="{{ path('admin_ad_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
