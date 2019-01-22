@@ -133,7 +133,6 @@ class AppFixtures extends Fixture
 
                     $manager->persist($comment);
                 }
-
             }
 
             $manager->persist($ad);

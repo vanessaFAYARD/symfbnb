@@ -20,6 +20,11 @@ class BookingController extends AbstractController
     /**
      * @Route("/annonces/{slug}/booking", name="booking_create")
      * @IsGranted("ROLE_USER")
+     *
+     * @param Ad $ad
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return Response
      */
     public function book(Ad $ad, Request $request, ObjectManager $manager)
     {
@@ -60,6 +65,10 @@ class BookingController extends AbstractController
 
     /**
      * @Route("/booking/{id}", name="booking_show")
+     *
+     * @param Booking $booking
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
     public function show(Booking $booking, Request $request, ObjectManager $manager)
@@ -82,9 +91,6 @@ class BookingController extends AbstractController
                 "Votre commentaire a bien été pris en compte"
             );
         }
-
-
-
 
         return $this->render('booking/show.html.twig', [
             'booking' => $booking,

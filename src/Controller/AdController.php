@@ -20,6 +20,8 @@ class AdController extends AbstractController
 {
     /**
      * @Route("/annonces", name="ads_list")
+     *
+     * @param AdRepository $repo
      * @return Response
      */
     public function index(AdRepository $repo)
@@ -35,6 +37,9 @@ class AdController extends AbstractController
      * create new add - form
      * @Route("/annonces/creer", name="ads_create")
      * @IsGranted("ROLE_USER")
+     *
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
     public function create(Request $request, ObjectManager $manager)
@@ -75,6 +80,10 @@ class AdController extends AbstractController
      * Show edit form
      * @Route("/annonces/{slug}/modifier", name="ads_edit")
      * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier")
+     *
+     * @param Ad $ad
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
     public function edit(Ad $ad, Request $request, ObjectManager $manager)
@@ -109,6 +118,8 @@ class AdController extends AbstractController
     /**
      * Return a response : ad
      * @Route("/annonces/{slug}", name="ads_show")
+     *
+     * @param Ad $ad
      * @return Response
      */
     public function show(Ad $ad)
@@ -125,6 +136,9 @@ class AdController extends AbstractController
      * Delete an ad
      * @Route("/annonces/{slug}/supprimer", name="ads_delete")
      * @Security("is_granted('ROLE_USER') and user == ad.getAuthor()", message="Vous n'avez pas le droit d'accéder à cette ressource")
+     *
+     * @param Ad $ad
+     * @param ObjectManager $manager
      * @return Response
      */
     public function delete(Ad $ad, ObjectManager $manager)
