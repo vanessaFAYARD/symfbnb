@@ -23,6 +23,8 @@ class AccountController extends AbstractController
      * Show form for login
      *
      * @Route("/login", name="account_login")
+     *
+     * @param AuthenticationUtils $utils
      * @return Response
      *
      */
@@ -53,6 +55,10 @@ class AccountController extends AbstractController
      * Show form for subscribe
      *
      * @Route("/inscription", name="account_register")
+     *
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
     public function registrer(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
@@ -89,6 +95,9 @@ class AccountController extends AbstractController
      *
      * @Route("/compte/profil", name="account_profile")
      * @IsGranted("ROLE_USER")
+     *
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
     public function profile(Request $request, ObjectManager $manager)
@@ -119,6 +128,10 @@ class AccountController extends AbstractController
      *
      * @Route("/compte/mot-de-passe", name="account_password")
      * @IsGranted("ROLE_USER")
+     *
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
     public function updatePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
