@@ -16,84 +16,31 @@
         <section>
             <h2 class="h1 my-5">Nos coups de coeur</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header text-center">
-                            1 chambre, <strong>125€/nuit</strong> <br>
-                            <small>0 avis</small>
-                        </div>
-                        <img class="img-card" src="http://placehold.it/1000x400" alt="appartement igloo" title="appartement igloo" width="1000" height="400">
-                        <div class="card-body">
-                            <h4 class="card-title">Dormir dans un igloo !</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias error eveniet libero magni optio porro quasi recusandae, reprehenderit unde voluptatem.
-                            </p>
-                            <a href="#" class="btn btn-secondary">En savoir +</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header text-center">
-                            2 chambres, <strong>99€/nuit</strong> <br>
-                            <small>0 avis</small>
-                        </div>
-                        <img class="img-card" src="http://placehold.it/1000x400" alt="appartement igloo" title="appartement igloo" width="1000" height="400">
-                        <div class="card-body">
-                            <h4 class="card-title">Dormir dans un arbre !</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias error eveniet libero magni optio porro quasi recusandae, reprehenderit unde voluptatem.
-                            </p>
-                            <a href="#" class="btn btn-secondary">En savoir +</a>
-                        </div>
-                    </div>
-                </div><div class="col-md-4">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header text-center">
-                            3 chambres, <strong>155€/nuit</strong> <br>
-                            <small>0 avis</small>
-                        </div>
-                        <img class="img-card" src="http://placehold.it/1000x400" alt="appartement igloo" title="appartement igloo" width="1000" height="400">
-                        <div class="card-body">
-                            <h4 class="card-title">Dormir dans un chateau !</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias error eveniet libero magni optio porro quasi recusandae, reprehenderit unde voluptatem.
-                            </p>
-                            <a href="#" class="btn btn-secondary">En savoir +</a>
-                        </div>
-                    </div>
-                </div>
+                {% for data in ads %}
+                    {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
+                {% endfor %}
             </div>
         </section>
         <section>
             <h2 class="h1 my-5">Nos meilleurs propriétaires</h2>
             <div class="row">
-                <div class="col">
-                    <div class="card border-active mb-3">
-                        <div class="card-body">
-                            <h4 class="card-title">Laura Martin</h4>
-                            <hr>
-                            <div class="card-text">
-                                <img src="http://placehold.it/64x64" alt="avatar Laura Martin" title="avatar Laura Martin" class="float-left mr-3">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, iste?</p>
-                                <a href="#" class="btn btn-success float-right">Découvrir ses biens</a>
+                {% for data in users %}
+                    <div class="col">
+                        <div class="card border-primary mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title">{{data.user.fullName}}</h4>
+
+                                <hr>
+
+                                <div class="card-text">
+                                    <img src="{{data.user.picture}}" alt="Avatar de {{data.user.fullName}}" class="float-left mr-3">
+                                    <p>{{data.user.introduction}}</p>
+                                    <a href="{{ path('user_show', {'slug': data.user.slug})}}" class="btn btn-success float-right">En savoir plus</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card border-active mb-3">
-                        <div class="card-body">
-                            <h4 class="card-title">Mathieu Vincent</h4>
-                            <hr>
-                            <div class="card-text">
-                                <img src="http://placehold.it/64x64" alt="avatar Mathieu Vincent" title="avatar Mathieu Vincent" class="float-left mr-3">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, iste?</p>
-                                <a href="#" class="btn btn-success float-right">Découvrir ses biens</a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+                {% endfor %}
         </section>
 
 
