@@ -17,12 +17,11 @@ class AdminAdController extends AbstractController
     /**
      * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      *
-     * @param AdRepository $adRepository
      * @param $page integer
      * @param PaginationService $pagination
      * @return Response
      */
-    public function index(AdRepository $adRepository, $page, PaginationService $pagination)
+    public function index($page, PaginationService $pagination)
     {
         $pagination->setEntityClass(Ad::class)
                     ->setCurrentPage($page);
@@ -33,6 +32,8 @@ class AdminAdController extends AbstractController
     }
 
     /**
+     * Edit an ad
+     *
      * @Route("/admin/ads/{id}/edit", name="admin_ad_edit")
      *
      * @param Ad $ad

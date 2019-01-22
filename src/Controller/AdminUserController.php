@@ -16,12 +16,11 @@ class AdminUserController extends AbstractController
     /**
      * @Route("/admin/users/{page<\d+>?1}", name="admin_users_index")
      *
-     * @param UserRepository $userRepository
      * @param $page integer
      * @param PaginationService $pagination
      * @return Response
      */
-    public function index(UserRepository $userRepository, $page, PaginationService $pagination)
+    public function index($page, PaginationService $pagination)
     {
         $pagination->setEntityClass(User::class)
             ->setCurrentPage($page)
@@ -33,6 +32,8 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * Delete an user
+     *
      * @Route("/admin/users/{id}/delete", name="admin_user_delete")
      *
      * @param User $user
@@ -54,7 +55,6 @@ class AdminUserController extends AbstractController
                 'success',
                 "L'utilisateur a bien été supprimé"
             );
-
         }
         return $this->redirectToRoute('admin_users_index');
     }

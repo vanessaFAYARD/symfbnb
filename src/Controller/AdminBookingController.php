@@ -17,12 +17,11 @@ class AdminBookingController extends AbstractController
     /**
      * @Route("/admin/bookings/{page<\d+>?1}", name="admin_bookings_index")
      *
-     * @param BookingRepository $bookingRepository
      * @param $page integer
      * @param PaginationService $pagination
      * @return Response
      */
-    public function index(BookingRepository $bookingRepository, $page, PaginationService $pagination)
+    public function index($page, PaginationService $pagination)
     {
         $pagination->setEntityClass(Booking::class)
                     ->setCurrentPage($page);
@@ -33,6 +32,8 @@ class AdminBookingController extends AbstractController
     }
 
     /**
+     * Edit a booking
+     *
      * @Route("/admin/bookings/{id}/edit", name="admin_booking_edit")
      *
      * @param Booking $booking
@@ -68,6 +69,7 @@ class AdminBookingController extends AbstractController
 
     /**
      * Delete a booking
+     *
      * @Route("/admin/bookings/{id}/delete", name="admin_booking_delete")
      *
      * @param Booking $booking

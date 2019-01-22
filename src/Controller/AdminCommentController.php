@@ -17,12 +17,11 @@ class AdminCommentController extends AbstractController
     /**
      * @Route("/admin/comments/{page<\d+>?1}", name="admin_comments_index")
      *
-     * @param CommentRepository $commentRepository
      * @param $page integer
      * @param PaginationService $pagination
      * @return Response
      */
-    public function index(CommentRepository $commentRepository, $page, PaginationService $pagination)
+    public function index($page, PaginationService $pagination)
     {
         $pagination->setEntityClass(Comment::class)
             ->setCurrentPage($page)
@@ -34,6 +33,8 @@ class AdminCommentController extends AbstractController
     }
 
     /**
+     * Edit a comment
+     *
      * @Route("/admin/comments/{id}/edit", name="admin_comment_edit")
      *
      * @param Comment $comment
@@ -64,6 +65,8 @@ class AdminCommentController extends AbstractController
     }
 
     /**
+     * Delete a comment
+     *
      * @Route("/admin/comments/{id}/delete", name="admin_comment_delete")
      *
      * @param Comment $comment
